@@ -3,7 +3,7 @@ import { pingHandler } from "./ping.controller.js";
 
 const heathcheckRouter: Router = Router();
 
-heathcheckRouter.get("/ping", pingHandler);
+heathcheckRouter.get("/", pingHandler);
 
 export {
     heathcheckRouter
