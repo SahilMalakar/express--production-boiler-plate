@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { pingHandler } from "./ping.controller.js";
 
+
 const heathcheckRouter: Router = Router();
 
-heathcheckRouter.get("/", pingHandler);
+heathcheckRouter.post(
+    "/ping",
+    pingHandler
+);
 
-export {
-    heathcheckRouter
-}
+export { heathcheckRouter };
