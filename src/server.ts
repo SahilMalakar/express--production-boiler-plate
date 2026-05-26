@@ -1,16 +1,14 @@
-import express, { type Request, type Response, type Express } from "express";
+import express, { type Express } from "express";
+import { ServerConfig } from "./config/index.js";
+import { pingHandler } from "./modules/health/ping.controller.js";
 
 const app: Express = express();
 
-const PORT: number = 6001;
+// Health check routes
+app.use(pingHandler)
 
-app.get("/ping", async (_req: Request, res: Response) => {
-  res.status(200).json({
-    msg: "Pong",
-  });
-});
 
-app.listen(PORT, (): void => {
-  console.log(`server is running on http://localhost:${PORT}`);
+app.listen(ServerConfig.PORT, (): void => {
+  console.log(`server is running on http://localhost:${ServerConfig.PORT}`);
   console.log(`Press Ctrl + C to stop the server`);
 });
