@@ -6,9 +6,11 @@ import { app } from "./server.js";
 app.use("/api/v1", heathcheckRouter);
 
 
-const server = app.listen(ServerConfig.PORT, (): void => {
-  console.log(`server is running on http://localhost:${ServerConfig.PORT}`);
-  console.log(`Press Ctrl + C to stop the server`);
+const server = app.listen(
+    ServerConfig.PORT,
+    (): void => {
+        console.log(`server is running on http://localhost:${ServerConfig.PORT}`);
+        console.log(`Press Ctrl + C to stop the server`);
 });
 
 const gracefulShutdown = (): void => {
