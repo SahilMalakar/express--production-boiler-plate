@@ -77,7 +77,7 @@ npm install -g pnpm
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/express-boilerplate.git
+git clone https://github.com/SahilMalakar/express--production-boiler-plate.git
 cd express-boilerplate
 
 # Install dependencies
