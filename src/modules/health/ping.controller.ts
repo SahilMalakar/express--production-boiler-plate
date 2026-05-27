@@ -1,13 +1,11 @@
-import { type Request, type Response } from "express";
+import { type Request, type Response } from 'express';
 
 export const pingHandler = async (
-  _req: Request,
-  res: Response,
+    _req: Request,
+    res: Response
 ): Promise<void> => {
-  res
-    .status(200).
-    json({
-       msg: "pong",
-       success: true,
-  });
+    res.status(200).json({
+        msg: 'pong',
+        success: true,
+    });
 };
