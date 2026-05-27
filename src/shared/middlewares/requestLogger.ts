@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import { logger } from '../../infra/logger/index.js';
+import { createRequestLogger } from '../../infra/logger/index.js';
+import { HTTP_STATUS } from '../utils/httpStatus.js';
 
 export const requestLogger = (
     req: Request,
@@ -7,17 +8,18 @@ export const requestLogger = (
     next: NextFunction
 ) => {
     const start = Date.now();
+    const log = createRequestLogger(req.correlationId);
 
     res.on('finish', () => {
         const ms = Date.now() - start;
         const level =
-            res.statusCode >= 500
+            res.statusCode >= HTTP_STATUS.INTERNAL_SERVER_ERROR
                 ? 'error'
-                : res.statusCode >= 400
+                : res.statusCode >= HTTP_STATUS.BAD_REQUEST
                   ? 'warn'
                   : 'http';
 
-        logger.log(level, 'incoming request', {
+        log.log(level, 'incoming request', {
             method: req.method,
             url: req.originalUrl,
             status: res.statusCode,

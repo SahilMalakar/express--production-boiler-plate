@@ -3,19 +3,19 @@ import { logger } from './infra/logger/index.js';
 import { app } from './server.js';
 
 const server = app.listen(ServerConfig.PORT, (): void => {
-    console.log(`server is running on http://localhost:${ServerConfig.PORT}`);
+    logger.info(`server is running on http://localhost:${ServerConfig.PORT}`);
     logger.info(`Press Ctrl + C to stop the server`);
 });
 
 const gracefulShutdown = (): void => {
-    console.log('Shutting down server...');
+    logger.info('Shutting down server...');
     try {
         server.close(() => {
-            console.log('HTTP Server closed.');
+            logger.info('HTTP Server closed.');
             process.exit(0);
         });
     } catch (error) {
-        console.error('Error occurred while shutting down server:', error);
+        logger.error('Error occurred while shutting down server:', error);
         process.exit(1);
     }
 };

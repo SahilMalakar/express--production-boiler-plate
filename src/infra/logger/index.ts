@@ -9,3 +9,7 @@ export const logger = winston.createLogger({
     transports: [consoleTransport, ...fileTransports],
     silent: LoggerConfig.isTest,
 });
+
+export const createRequestLogger = (correlationId: string) => {
+    return logger.child({ correlationId });
+};
