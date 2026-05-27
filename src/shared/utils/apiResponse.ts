@@ -1,11 +1,12 @@
 import type { Response } from 'express';
 import { LoggerConfig } from '../../config/index.js';
+import { HTTP_STATUS } from './httpStatus.js';
 
 export const sendSuccess = <T>(
     res: Response,
     data: T = null as T,
     message = 'Success',
-    statusCode = 200
+    statusCode = HTTP_STATUS.OK
 ) => {
     return res.status(statusCode).json({
         success: true,
@@ -18,7 +19,7 @@ export const sendSuccess = <T>(
 export const sendError = (
     res: Response,
     message = 'Internal Server Error',
-    statusCode = 500,
+    statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR,
     errorCode = 'INTERNAL_ERROR',
     stack?: string
 ) => {
@@ -40,7 +41,7 @@ export const sendPaginated = <T>(
         limit: number;
     },
     message = 'Success',
-    statusCode = 200
+    statusCode = HTTP_STATUS.OK
 ) => {
     return res.status(statusCode).json({
         success: true,

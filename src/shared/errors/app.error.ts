@@ -1,3 +1,5 @@
+import { HTTP_STATUS } from '../utils/httpStatus.js';
+
 export class AppError extends Error {
     public statusCode: number;
     public isOperational: boolean;
@@ -5,7 +7,7 @@ export class AppError extends Error {
 
     constructor(
         message: string,
-        statusCode: number = 500,
+        statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR,
         errorCode?: string,
         isOperational: boolean = true
     ) {
@@ -23,36 +25,40 @@ export class AppError extends Error {
 
 export class ValidationError extends AppError {
     constructor(message: string) {
-        super(message, 400, 'VALIDATION_ERROR');
+        super(message, HTTP_STATUS.UNPROCESSABLE_ENTITY, 'VALIDATION_ERROR');
     }
 }
 
 export class NotFoundError extends AppError {
     constructor(message: string) {
-        super(message, 404, 'NOT_FOUND');
+        super(message, HTTP_STATUS.NOT_FOUND, 'NOT_FOUND');
     }
 }
 
 export class UnauthorizedError extends AppError {
     constructor(message: string) {
-        super(message, 401, 'UNAUTHORIZED');
+        super(message, HTTP_STATUS.UNAUTHORIZED, 'UNAUTHORIZED');
     }
 }
 
 export class ForbiddenError extends AppError {
     constructor(message: string) {
-        super(message, 403, 'FORBIDDEN');
+        super(message, HTTP_STATUS.FORBIDDEN, 'FORBIDDEN');
     }
 }
 
 export class InternalServerError extends AppError {
     constructor(message: string) {
-        super(message, 500, 'INTERNAL_SERVER_ERROR');
+        super(
+            message,
+            HTTP_STATUS.INTERNAL_SERVER_ERROR,
+            'INTERNAL_SERVER_ERROR'
+        );
     }
 }
 
 export class BadRequestError extends AppError {
     constructor(message: string) {
-        super(message, 400, 'BAD_REQUEST');
+        super(message, HTTP_STATUS.BAD_REQUEST, 'BAD_REQUEST');
     }
 }

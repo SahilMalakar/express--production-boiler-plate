@@ -1,13 +1,10 @@
 import { ServerConfig } from './config/index.js';
-import { heathcheckRouter } from './modules/health/ping.route.js';
+import { logger } from './infra/logger/index.js';
 import { app } from './server.js';
-
-// Health check routes
-app.use('/api/v1', heathcheckRouter);
 
 const server = app.listen(ServerConfig.PORT, (): void => {
     console.log(`server is running on http://localhost:${ServerConfig.PORT}`);
-    console.log(`Press Ctrl + C to stop the server`);
+    logger.info(`Press Ctrl + C to stop the server`);
 });
 
 const gracefulShutdown = (): void => {
