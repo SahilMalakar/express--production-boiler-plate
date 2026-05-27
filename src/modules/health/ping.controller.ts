@@ -1,11 +1,12 @@
 import { type Request, type Response } from 'express';
+import { sendSuccess } from '../../shared/utils/apiResponse.js';
 
 export const pingHandler = async (
     _req: Request,
     res: Response
 ): Promise<void> => {
-    res.status(200).json({
-        msg: 'pong',
-        success: true,
-    });
+    sendSuccess(
+        res,
+        "pong"
+    )
 };
